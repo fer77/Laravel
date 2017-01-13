@@ -65,31 +65,25 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+        <!-- 1. With vanilla PHP: -->
+        <h1>Vanilla PHP</h1>
+        <?php foreach ($people as $person) : ?>
+            <li><?= $person; ?></li>
+        <?php endforeach ?>
+<hr>
+        <!-- 2. With blade: -->
+        <!-- Behind the scenes blade builds the PHP fragments, then views are loaded and cashed. The cashed files is what gets loaded here. -->
+        <h1>Blade</h1>
+        <!-- unless, key word is the same as if(! ) -->
+        @unless (empty($people))
+            Burgers are being made!
+        @else
+            There is no one in the restaurant.
+        @endunless
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+        @foreach ($people as $person)
+            <li>{{$person}}</li>
+        @endforeach
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
